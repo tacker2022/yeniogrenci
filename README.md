@@ -14,10 +14,24 @@ Modern web teknolojileri ile hazırlanmış bu uygulama, öğrenci takibini kola
 ## Kurulum
 Herhangi bir derleme adımı gerektirmez. Depoyu indirip doğrudan tarayıcınızda `index.html` dosyasını açmanız yeterlidir.
 
+### Adım Adım Açılış
+1. Depoyu indirin veya ZIP olarak bilgisayarınıza kaydedip klasöre çıkarın.
+2. Klasördeki `index.html` dosyasına çift tıklayın.
+   - Windows/macOS'ta varsayılan tarayıcı otomatik olarak açılır.
+   - Eğer tarayıcı seçmeniz istenirse Chrome, Edge, Firefox veya Safari'den birini seçebilirsiniz.
+3. Uygulama tarayıcıda açıldığında tüm işlevleri çevrimdışı çalışır; ek bir sunucuya gerek yoktur.
+
+Komut satırı kullanmak isterseniz:
+
 ```bash
 git clone https://github.com/<kullanici>/yeniogrenci.git
 cd yeniogrenci
-open index.html # veya dosyayı tarayıcıda açın
+# macOS'ta
+open index.html
+# Windows'ta (PowerShell)
+start index.html
+# Linux'ta (varsayılan tarayıcıyı açar)
+xdg-open index.html
 ```
 
 > Not: Uygulama verileri tarayıcı üzerinde sakladığı için farklı tarayıcı veya cihazlarda farklı veri setleri oluşacaktır.
