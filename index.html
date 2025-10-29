@@ -16,9 +16,12 @@
     <header class="app-header">
       <div>
         <h1>Öğrenci Takip Panosu</h1>
-        <p>Ekiplerinizi, mentor görüşmelerini ve ders ilerlemelerini tek noktadan yönetin.</p>
+        <p>Premium analizler ve akıllı uyarılarla öğrencilerinizi tek noktadan yönetin.</p>
       </div>
-      <button id="toggleTheme" type="button" aria-label="Tema değiştir">🌙</button>
+      <div class="header-actions">
+        <button id="toggleTheme" type="button" aria-label="Tema değiştir">🌙</button>
+        <button id="snapshotBtn" type="button" class="tertiary">Anlık Durum</button>
+      </div>
     </header>
 
     <main>
@@ -63,6 +66,10 @@
               <input id="cohort" name="cohort" type="text" placeholder="Frontend 2024" />
             </label>
             <label>
+              Mentor
+              <input id="mentor" name="mentor" type="text" placeholder="Örn. Merve Koç" />
+            </label>
+            <label>
               Durum
               <select id="status" name="status">
                 <option value="active">Aktif</option>
@@ -83,6 +90,14 @@
                 value="0"
               />
             </label>
+            <label>
+              Son Görüşme
+              <input id="lastContact" name="lastContact" type="date" />
+            </label>
+            <label>
+              Takip Tarihi
+              <input id="nextMeeting" name="nextMeeting" type="date" />
+            </label>
           </div>
           <label>
             Notlar
@@ -93,6 +108,46 @@
             <button id="resetBtn" type="reset" class="ghost">Temizle</button>
           </div>
         </form>
+      </section>
+
+      <section class="panel" aria-label="Akıllı İçgörüler">
+        <div class="panel-header">
+          <h2>Akıllı İçgörüler</h2>
+          <p class="panel-subtitle">İlerlemenizi gerçek zamanlı analizler ve önerilerle takip edin.</p>
+        </div>
+        <div class="insights-grid">
+          <article class="insight-card">
+            <header>
+              <h3>Ortalama İlerleme</h3>
+            </header>
+            <p id="avgProgress" class="insight-value">0%</p>
+            <span id="distributionText" class="insight-meta">Öğrenci verisi bekleniyor</span>
+          </article>
+          <article class="insight-card">
+            <header>
+              <h3>Yaklaşan Takipler</h3>
+            </header>
+            <p id="upcomingCount" class="insight-value">0</p>
+            <span class="insight-meta">Önümüzdeki 7 gün</span>
+          </article>
+          <article class="insight-card">
+            <header>
+              <h3>Spotlight Öğrenci</h3>
+            </header>
+            <p id="spotlightStudent" class="insight-value">—</p>
+            <span id="spotlightMeta" class="insight-meta">Henüz öneri yok</span>
+          </article>
+        </div>
+        <div class="insight-detail">
+          <div>
+            <h4>Takvim Akışı</h4>
+            <ul id="upcomingList" class="timeline" aria-live="polite"></ul>
+          </div>
+          <div>
+            <h4>Akıllı Öneriler</h4>
+            <ul id="smartHints" class="smart-hints" aria-live="polite"></ul>
+          </div>
+        </div>
       </section>
 
       <section class="panel" aria-label="Öğrenci Listesi">
@@ -113,6 +168,17 @@
               <span class="sr-only">Ara</span>
               <input id="searchInput" type="search" placeholder="İsim, e-posta veya notlarda ara" />
             </label>
+            <label>
+              Min. İlerleme
+              <div class="range-field">
+                <input id="progressFilter" type="range" min="0" max="100" value="0" step="5" />
+                <output id="progressValue" for="progressFilter">0%</output>
+              </div>
+            </label>
+            <label class="switch">
+              <span>Sadece dikkat gerektirenler</span>
+              <input id="attentionOnly" type="checkbox" />
+            </label>
             <button id="exportBtn" type="button" class="ghost">CSV Aktar</button>
           </div>
         </div>
@@ -123,15 +189,17 @@
               <tr>
                 <th>İsim</th>
                 <th>Program</th>
+                <th>Mentor</th>
                 <th>Durum</th>
                 <th>İlerleme</th>
                 <th>Son Güncelleme</th>
+                <th>Takip</th>
                 <th>Aksiyonlar</th>
               </tr>
             </thead>
             <tbody id="studentsBody">
               <tr>
-                <td colspan="6" class="empty">Henüz öğrenci eklenmedi.</td>
+                <td colspan="8" class="empty">Henüz öğrenci eklenmedi.</td>
               </tr>
             </tbody>
           </table>
@@ -152,8 +220,10 @@
         <td class="student-info">
           <span class="name"></span>
           <span class="contact"></span>
+          <span class="meta last-contact"></span>
         </td>
         <td class="cohort"></td>
+        <td class="mentor"></td>
         <td>
           <span class="status-badge"></span>
         </td>
@@ -164,6 +234,7 @@
           </div>
         </td>
         <td class="updated"></td>
+        <td class="next-meeting"></td>
         <td class="actions">
           <button type="button" class="ghost view-notes">Notlar</button>
           <button type="button" class="ghost edit">Düzenle</button>

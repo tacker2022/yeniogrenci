@@ -3,10 +3,13 @@
 Modern web teknolojileri ile hazırlanmış bu uygulama, öğrenci takibini kolaylaştırmak için tasarlanmış tek sayfalık bir panodur. Öğrenci bilgilerini saklar, durumlarına göre filtreleme yapar, notları görüntülemeye izin verir ve listeyi CSV formatında dışa aktarır.
 
 ## Özellikler
-- 🎯 Öğrencileri isim, iletişim, program, durum, ilerleme ve notlarıyla beraber kaydedebilme
-- 🔍 Durum filtresi ve anlık arama ile hızlı listeleme
-- 📊 Durum kartları ile toplam aktif, tatilde, mezun ve risk altındaki öğrenci sayısını görüntüleme
-- 🗒️ Notları diyalog penceresinde görüntüleme
+- 🎯 Öğrencileri isim, iletişim, program, mentor, ilerleme ve notlarıyla beraber kaydedebilme
+- 🔍 Durum filtresi, anlık arama ve minimum ilerleme slider’ı ile hızlı listeleme
+- 🚨 Tek tıkla “dikkat gerektirenler” filtresiyle riskli öğrencileri ayıklama
+- 📊 Durum kartları ve akıllı içgörüler ile ortalama ilerleme, yaklaşan takipler ve spotlight öğrenci takibi
+- 🗓️ Mentor, son görüşme ve takip tarihi alanlarıyla premium CRM deneyimi
+- 🧠 Zaman çizelgesi ve akıllı önerilerle haftalık aksiyon planı oluşturma
+- 📋 “Anlık Durum” butonu ile özet raporu panodan kopyalama veya indirme
 - 💾 Tarayıcı `localStorage` alanına otomatik kaydetme ve örnek veri ile başlatma
 - 🌗 Karanlık / aydınlık tema desteği
 - 📤 Listeyi CSV dosyası olarak dışa aktarma
@@ -41,7 +44,7 @@ Dosyalar düz HTML/CSS/JS kullanılarak hazırlanmıştır. Bir canlı geliştir
 
 ### Kod Yapısı
 - `index.html`: Arayüz bileşenleri ve temel sayfa yapısı
-- `styles.css`: Görsel tasarım, tipografi ve responsive düzenler
-- `app.js`: Öğrenci listesi mantığı, filtreleme, tema, CSV aktarımı
+- `styles.css`: Görsel tasarım, premium kartlar, zaman çizelgesi ve responsive düzenler
+- `app.js`: Öğrenci listesi mantığı, gelişmiş filtreler, içgörüler, tema ve CSV aktarımı
 
 Görüş ve katkılarınızı bekleriz!
