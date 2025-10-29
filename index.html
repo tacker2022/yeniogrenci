@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Öğrenci Takip Panosu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>Öğrenci Takip Panosu</h1>
+        <p>Ekiplerinizi, mentor görüşmelerini ve ders ilerlemelerini tek noktadan yönetin.</p>
+      </div>
+      <button id="toggleTheme" type="button" aria-label="Tema değiştir">🌙</button>
+    </header>
+
+    <main>
+      <section class="cards" aria-label="Durum kartları">
+        <article class="card">
+          <h2>Aktif Öğrenci</h2>
+          <p id="activeCount">0</p>
+        </article>
+        <article class="card">
+          <h2>Tatilde</h2>
+          <p id="onLeaveCount">0</p>
+        </article>
+        <article class="card">
+          <h2>Mezun</h2>
+          <p id="completedCount">0</p>
+        </article>
+        <article class="card">
+          <h2>Risk Altında</h2>
+          <p id="riskCount">0</p>
+        </article>
+      </section>
+
+      <section class="panel" aria-label="Öğrenci Ekleme Formu">
+        <h2>Yeni Öğrenci Ekle</h2>
+        <form id="studentForm">
+          <input type="hidden" id="studentId" />
+          <div class="form-grid">
+            <label>
+              İsim Soyisim
+              <input id="fullName" name="fullName" type="text" placeholder="Örn. Ayşe Yılmaz" required />
+            </label>
+            <label>
+              E-posta
+              <input id="email" name="email" type="email" placeholder="ayse@example.com" required />
+            </label>
+            <label>
+              Telefon
+              <input id="phone" name="phone" type="tel" placeholder="05xx xxx xx xx" />
+            </label>
+            <label>
+              Program / Grup
+              <input id="cohort" name="cohort" type="text" placeholder="Frontend 2024" />
+            </label>
+            <label>
+              Durum
+              <select id="status" name="status">
+                <option value="active">Aktif</option>
+                <option value="on_leave">Tatilde</option>
+                <option value="completed">Mezun</option>
+                <option value="risky">Risk Altında</option>
+              </select>
+            </label>
+            <label>
+              İlerleme (%)
+              <input
+                id="progress"
+                name="progress"
+                type="number"
+                min="0"
+                max="100"
+                step="5"
+                value="0"
+              />
+            </label>
+          </div>
+          <label>
+            Notlar
+            <textarea id="notes" name="notes" rows="3" placeholder="Mentor görüşmesi, eksik ödevler vb."></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="primary">Kaydet</button>
+            <button id="resetBtn" type="reset" class="ghost">Temizle</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-label="Öğrenci Listesi">
+        <div class="panel-header">
+          <h2>Öğrenci Listesi</h2>
+          <div class="filters">
+            <label>
+              Durum
+              <select id="statusFilter">
+                <option value="all">Tümü</option>
+                <option value="active">Aktif</option>
+                <option value="on_leave">Tatilde</option>
+                <option value="completed">Mezun</option>
+                <option value="risky">Risk Altında</option>
+              </select>
+            </label>
+            <label class="search">
+              <span class="sr-only">Ara</span>
+              <input id="searchInput" type="search" placeholder="İsim, e-posta veya notlarda ara" />
+            </label>
+            <button id="exportBtn" type="button" class="ghost">CSV Aktar</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="studentsTable">
+            <thead>
+              <tr>
+                <th>İsim</th>
+                <th>Program</th>
+                <th>Durum</th>
+                <th>İlerleme</th>
+                <th>Son Güncelleme</th>
+                <th>Aksiyonlar</th>
+              </tr>
+            </thead>
+            <tbody id="studentsBody">
+              <tr>
+                <td colspan="6" class="empty">Henüz öğrenci eklenmedi.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="notesDialog">
+      <div class="dialog-header">
+        <h3 id="dialogTitle">Notlar</h3>
+        <button type="button" id="closeDialog" aria-label="Kapat">✕</button>
+      </div>
+      <article id="dialogContent"></article>
+    </dialog>
+
+    <template id="studentRowTemplate">
+      <tr>
+        <td class="student-info">
+          <span class="name"></span>
+          <span class="contact"></span>
+        </td>
+        <td class="cohort"></td>
+        <td>
+          <span class="status-badge"></span>
+        </td>
+        <td>
+          <div class="progress" role="presentation">
+            <div class="progress-bar"></div>
+            <span class="progress-text"></span>
+          </div>
+        </td>
+        <td class="updated"></td>
+        <td class="actions">
+          <button type="button" class="ghost view-notes">Notlar</button>
+          <button type="button" class="ghost edit">Düzenle</button>
+          <button type="button" class="danger delete">Sil</button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
